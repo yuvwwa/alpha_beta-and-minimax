@@ -39,7 +39,6 @@ def is_valid_move(board, col):
 
 # индекс первой доступной строки в указанной колонке (пригодится в самой функции игры)
 def get_next_open_row(board, col):
-    """Возвращает индекс первой доступной строки в указанной колонке."""
     for row in range(rows):
         if board[row, col] == empty:
             return row
@@ -158,7 +157,10 @@ def minimaxAndAlphabeta(board, depth, alpha, beta, ai_player):
             return None, score_position(board, ai)
 
     # получаем доступные ходы
-    valid_moves = [col for col in range(cols) if is_valid_move(board, col)]
+    valid_moves = []
+    for col in range(cols):
+        if is_valid_move(board, col):
+            valid_moves.append(col)
 
     # если ходит компьютер (задаем самое низкое значение value и рандомно выбираем лучший ход, в дальнейшем меняем его на более выгодный)
     if ai_player:
